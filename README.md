@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Robots.txt Studio 🤖
 
-## Getting Started
+[![License: MIT](https://img.shields.Drawing.co.uk/badge/License-MIT-yellow.svg)](LICENSE)
+[![React 19](https://img.shields.io/badge/React-19-blue.svg)](https://react.dev)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org)
+[![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8.svg)](https://tailwindcss.com)
+[![Package Manager: pnpm](https://img.shields.io/badge/pnpm-11-orange.svg)](https://pnpm.io)
 
-First, run the development server:
+A premium, standalone React and Next.js component designed for integration into custom UI systems and admin dashboards. Create, test, and generate SEO-compliant `robots.txt` files directly in your client application with zero backend dependencies.
+
+---
+
+## Key Features
+
+*   **Interactive Rules Builder**: Manage multiple user-agent groups, add allow/disallow paths, and customize `Crawl-delay` seconds.
+*   **AI Scraper Blocking**: Prevent AI agents (e.g., `GPTBot`, `ChatGPT-User`, `ClaudeBot`, `Google-Extended`, `PerplexityBot`) from harvesting content with a single click.
+*   **Path Validation Engine**: A client-side path validation runner implementing standard matching rules (longest match wins, allow over disallow on equal length).
+*   **Robots.txt Importer**: Paste any raw `robots.txt` text to parse its directives, sitemaps, and crawlers instantly.
+*   **Presets Support**: Instantly load setups like *Allow All*, *Disallow All*, *Block Staging/Dev*, or *SEO Balanced*.
+*   **Real-time Preview & Exports**: Real-time code previews with quick "Copy to Clipboard" and download options.
+*   **Zero Package Overhead**: The component requires no external npm UI or icon libraries; all icons are inline SVGs.
+
+---
+
+## Installation
+
+### Method 1: Automatic Installer (Recommended)
+Create the file and fetch the source code directly using this command in your project directory:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+mkdir -p components && curl -sS https://raw.githubusercontent.com/mleem97/lnxr-robotsgen-ui/main/components/RobotsTxtGenerator.tsx -o components/RobotsTxtGenerator.tsx
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Method 2: Manual Installation
+1.  Create a file at `components/RobotsTxtGenerator.tsx` in your codebase.
+2.  Copy the code from the [RobotsTxtGenerator.tsx](file:///components/RobotsTxtGenerator.tsx) file in this repository.
+3.  Ensure your project uses **Tailwind CSS** for styling.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
+Import and render the component anywhere in your Next.js or React layout:
 
-To learn more about Next.js, take a look at the following resources:
+```tsx
+import RobotsTxtGenerator from "@/components/RobotsTxtGenerator";
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+export default function AdminSettings() {
+  const handleExport = (robotsTxtContent: string) => {
+    console.log("Updated robots.txt:", robotsTxtContent);
+  };
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  return (
+    <div className="container mx-auto py-10">
+      <h1 className="text-3xl font-bold mb-6">SEO Controls</h1>
+      <RobotsTxtGenerator onExport={handleExport} />
+    </div>
+  );
+}
+```
 
-## Deploy on Vercel
+### Component Props
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `initialSitemaps` | `string[]` | `['https://example.com/sitemap.xml']` | Set of default sitemap URLs loaded initially. |
+| `initialGroups` | `RuleGroup[]` | *(Default SEO rules)* | Standard list of crawler directive groups loaded initially. |
+| `onExport` | `(robotsTxt: string) => void` | `undefined` | Callback fired whenever the generated text content updates. |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Local Development
+
+Ensure you have **pnpm** installed.
+
+### 1. Launch Next.js dev server:
+```bash
+pnpm dev
+```
+Open [http://localhost:3001](http://localhost:3001) in your browser.
+
+### 2. Verify code linting:
+```bash
+pnpm lint
+```
+
+### 3. Compile local build:
+```bash
+pnpm build
+```
+
+---
+
+## Contributing & Sponsors
+
+Please refer to the following documents for further development:
+*   [CONTRIBUTING.md](file:///CONTRIBUTING.md) — Coding styles and directory architecture.
+*   [LICENSE](file:///LICENSE) — MIT open-source license.
+*   [FUNDING.md](file:///FUNDING.md) — Sponsorship channels and business support.
+*   [SPONSORS.md](file:///SPONSORS.md) — Thanking our financial backers.
+*   [CONTRIBUTORS.md](file:///CONTRIBUTORS.md) — Authors and maintainers list.
+
+---
+
+**Meyer Media - Marvin Lee Meyer**  
+*Built as a Standalone Element for React.*
